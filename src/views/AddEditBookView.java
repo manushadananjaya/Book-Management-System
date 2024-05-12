@@ -1,6 +1,8 @@
-package views;
+package views;  
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -25,45 +27,46 @@ public class AddEditBookView {
 
     public void show() {
         VBox root = new VBox(10);
-        root.setPrefSize(500, 600);
-        root.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 20px;");
+        root.setPadding(new Insets(20));
+        root.setAlignment(Pos.CENTER);
 
         Label titleLabel = new Label("Add a Book");
+
         if (bookToEdit != null) {
             titleLabel.setText("Edit Book");
-            titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-        } else {
-            titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333;");
         }
 
         TextField nameField = new TextField();
-        nameField.setStyle("-fx-pref-width: 200px;");
-        ComboBox<Genre> genreComboBox = new ComboBox<>();
-        genreComboBox.setStyle("-fx-pref-width: 200px;");
-        genreComboBox.getItems().addAll(Genre.values());
-        ComboBox<Language> languageComboBox = new ComboBox<>();
-        languageComboBox.setStyle("-fx-pref-width: 200px;");
-        languageComboBox.getItems().addAll(Language.values());
-        TextField publishedYearField = new TextField();
-        publishedYearField.setStyle("-fx-pref-width: 200px;");
-        TextField isbnField = new TextField();
-        isbnField.setStyle("-fx-pref-width: 200px;");
-        TextField pageCountField = new TextField();
-        pageCountField.setStyle("-fx-pref-width: 200px;");
+        nameField.setPrefWidth(200);
 
+        ComboBox<Genre> genreComboBox = new ComboBox<>();
+        genreComboBox.setPrefWidth(200);
+        genreComboBox.getItems().addAll(Genre.values());
+
+        ComboBox<Language> languageComboBox = new ComboBox<>();
+        languageComboBox.setPrefWidth(200);
+        languageComboBox.getItems().addAll(Language.values());
+
+        TextField publishedYearField = new TextField();
+        publishedYearField.setPrefWidth(200);
+
+        TextField isbnField = new TextField();
+        isbnField.setPrefWidth(200);
+
+        TextField pageCountField = new TextField();
+        pageCountField.setPrefWidth(200);
+
+        // Set values for fields if editing
         if (bookToEdit != null) {
             nameField.setText(bookToEdit.getName());
-            Genre genre = Genre.valueOf(bookToEdit.getGenre());
-            genreComboBox.setValue(genre);
+            genreComboBox.setValue(Genre.valueOf(bookToEdit.getGenre()));
             languageComboBox.setValue(Language.valueOf(bookToEdit.getLanguage()));
-            
             publishedYearField.setText(String.valueOf(bookToEdit.getPublishedYear()));
             isbnField.setText(bookToEdit.getIsbn());
             pageCountField.setText(String.valueOf(bookToEdit.getPageCount()));
         }
 
         Button addButton = new Button("Add");
-        addButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px 16px; -fx-border-radius: 4px;");
         addButton.setOnAction(event -> {
             // Create a new book object
             Book newBook = new Book(
@@ -75,7 +78,7 @@ public class AddEditBookView {
                     Integer.parseInt(pageCountField.getText())
             );
 
-            // Add the newBook to the books list
+            // Add or edit the book
             if (bookToEdit != null) {
                 int index = books.indexOf(bookToEdit);
                 books.set(index, newBook);
@@ -83,6 +86,16 @@ public class AddEditBookView {
                 books.add(newBook);
             }
 
+            // Close the window
+            primaryStage.close();
+
+            // Show dashboard
+            new DashboardView(primaryStage, books).show();
+        });
+
+        // Cancel button
+        Button cancelButton = new Button("Cancel");
+        cancelButton.setOnAction(event -> {
             // Close the window
             primaryStage.close();
 
@@ -98,10 +111,11 @@ public class AddEditBookView {
                 new Label("Published Year: "), publishedYearField,
                 new Label("ISBN: "), isbnField,
                 new Label("Page Count: "), pageCountField,
-                addButton
+                addButton,
+                cancelButton 
         );
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 500, 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Add Book");
         primaryStage.show();

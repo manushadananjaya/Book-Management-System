@@ -25,7 +25,6 @@ public class SearchView {
     public void show() {
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(20));
-        root.setStyle("-fx-background-color: #f0f0f0;"); // Set background color
 
         // Create TableView and columns
         TableView<Book> tableView = new TableView<>();
@@ -47,19 +46,15 @@ public class SearchView {
         TableColumn<Book, Integer> pageCountColumn = new TableColumn<>("Page Count");
         pageCountColumn.setCellValueFactory(cellData -> cellData.getValue().pageCountProperty().asObject());
 
-       
-
         tableView.getColumns().addAll(nameColumn, genreColumn, languageColumn, publishedYearColumn, isbnColumn, pageCountColumn);
         tableView.setItems(controller.getSearchResults());
-        tableView.setStyle("-fx-background-color: white;"); // Set background color for TableView
 
         // Create search bar
         TextField searchField = new TextField();
         searchField.setPromptText("Enter search term");
-        searchField.setStyle("-fx-pref-width: 200px;"); // Set preferred width for TextField
+        searchField.setPrefWidth(200);
 
         Button searchButton = new Button("Search");
-        searchButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"); // Set button style
         searchButton.setOnAction(event -> {
             String searchTerm = searchField.getText();
             controller.searchBooks(searchTerm);
