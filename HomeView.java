@@ -1,6 +1,4 @@
-package views;
 
-import controllers.HomeController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
-import models.Book;
 
 public class HomeView {
     private final Stage primaryStage;

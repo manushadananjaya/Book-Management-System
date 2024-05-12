@@ -1,6 +1,4 @@
-package comparators;
 
-import models.Book;
 import java.util.Comparator;
 
 public class PublishedYearComparator implements Comparator<Book> {

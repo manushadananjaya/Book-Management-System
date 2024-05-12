@@ -1,4 +1,4 @@
-package views;  
+
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -10,9 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import models.Book;
-import models.Genre;
-import models.Language;
+
 
 public class AddEditBookView {
     private final Stage primaryStage;

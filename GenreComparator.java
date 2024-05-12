@@ -1,6 +1,4 @@
-package comparators;
 
-import models.Book;
 import java.util.Comparator;
 
 public class GenreComparator implements Comparator<Book> {

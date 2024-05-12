@@ -1,4 +1,4 @@
-package views;
+
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -10,8 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import models.Book;
-import controllers.SearchController;
+
 
 public class SearchView {
     private final Stage primaryStage;

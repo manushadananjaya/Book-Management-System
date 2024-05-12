@@ -1,10 +1,8 @@
-package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
-import models.Book;
-import views.DashboardView;
+
 
 public class HomeController {
 
