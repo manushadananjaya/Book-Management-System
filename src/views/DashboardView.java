@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,7 +13,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import models.Book;
-
 
 import java.util.Comparator;
 
@@ -57,6 +57,11 @@ public class DashboardView {
         Button nameSortButton = new Button("Sort by Name");
         Button yearSortButton = new Button("Sort by Published Year");
 
+        // Apply styles to sorting buttons
+        genreSortButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
+        nameSortButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
+        yearSortButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
+
         // Sorting event handlers
         genreSortButton.setOnAction(event -> {
             controller.sortBooks(Comparator.comparing(Book::getGenre));
@@ -72,22 +77,35 @@ public class DashboardView {
 
         // Create buttons
         Button addButton = new Button("Add a Book");
+        addButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
         addButton.setOnAction(event -> controller.addBook());
 
         Button editButton = new Button("Edit Book Details");
+        editButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
         editButton.setOnAction(event -> {
             Book selectedBook = tableView.getSelectionModel().getSelectedItem();
             if (selectedBook != null) {
                 controller.editBook(selectedBook);
             } else {
                 // Display an error message or handle the case when no book is selected
+                alert("No book selected", "Please select a book to edit.");
             }
         });
 
         Button removeButton = new Button("Remove Book");
-        removeButton.setOnAction(event -> controller.removeBook(tableView.getSelectionModel().getSelectedItem()));
+        removeButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #f44336; -fx-text-fill: white;");
+        removeButton.setOnAction(event -> {
+            Book selectedBook = tableView.getSelectionModel().getSelectedItem();
+            if (selectedBook != null) {
+                controller.removeBook(selectedBook);
+            } else {
+                // Display an error message or handle the case when no book is selected
+                alert("No book selected", "Please select a book to remove.");
+            }
+        });
 
         Button searchButton = new Button("Search Books");
+        searchButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
         searchButton.setOnAction(event -> controller.searchBooks());
 
         // Arrange buttons in an HBox
@@ -98,9 +116,17 @@ public class DashboardView {
         root.setCenter(tableView);
         root.setBottom(buttonBox);
 
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 1000, 800);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Library Management System - Dashboard");
         primaryStage.show();
+    }
+
+    private void alert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -25,32 +25,34 @@ public class AddEditBookView {
 
     public void show() {
         VBox root = new VBox(10);
-        root.setPrefSize(400, 300);
+        root.setPrefSize(500, 600);
+        root.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 20px;");
 
         Label titleLabel = new Label("Add a Book");
         if (bookToEdit != null) {
             titleLabel.setText("Edit Book");
+            titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        } else {
+            titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333;");
         }
 
         TextField nameField = new TextField();
+        nameField.setStyle("-fx-pref-width: 200px;");
         ComboBox<Genre> genreComboBox = new ComboBox<>();
+        genreComboBox.setStyle("-fx-pref-width: 200px;");
         genreComboBox.getItems().addAll(Genre.values());
         ComboBox<Language> languageComboBox = new ComboBox<>();
+        languageComboBox.setStyle("-fx-pref-width: 200px;");
         languageComboBox.getItems().addAll(Language.values());
         TextField publishedYearField = new TextField();
+        publishedYearField.setStyle("-fx-pref-width: 200px;");
         TextField isbnField = new TextField();
+        isbnField.setStyle("-fx-pref-width: 200px;");
         TextField pageCountField = new TextField();
-
-        if (bookToEdit != null) {
-            nameField.setText(bookToEdit.getName());
-            genreComboBox.setValue(Genre.valueOf(bookToEdit.getGenre()));
-            languageComboBox.setValue(Language.valueOf(bookToEdit.getLanguage()));
-            publishedYearField.setText(String.valueOf(bookToEdit.getPublishedYear()));
-            isbnField.setText(bookToEdit.getIsbn());
-            pageCountField.setText(String.valueOf(bookToEdit.getPageCount()));
-        }
+        pageCountField.setStyle("-fx-pref-width: 200px;");
 
         Button addButton = new Button("Add");
+        addButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px 16px; -fx-border-radius: 4px;");
         addButton.setOnAction(event -> {
             // Create a new book object
             Book newBook = new Book(
