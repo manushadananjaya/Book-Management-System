@@ -13,6 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import models.Book;
 
+
+import java.util.Comparator;
+
 public class DashboardView {
     private final Stage primaryStage;
     private final DashboardController controller;
@@ -49,6 +52,24 @@ public class DashboardView {
         tableView.getColumns().addAll(nameColumn, genreColumn, languageColumn, publishedYearColumn, isbnColumn, pageCountColumn);
         tableView.setItems(controller.getBooks()); // Set items from the controller
 
+        // Create sorting buttons
+        Button genreSortButton = new Button("Sort by Genre");
+        Button nameSortButton = new Button("Sort by Name");
+        Button yearSortButton = new Button("Sort by Published Year");
+
+        // Sorting event handlers
+        genreSortButton.setOnAction(event -> {
+            controller.sortBooks(Comparator.comparing(Book::getGenre));
+        });
+
+        nameSortButton.setOnAction(event -> {
+            controller.sortBooks(Comparator.comparing(Book::getName));
+        });
+
+        yearSortButton.setOnAction(event -> {
+            controller.sortBooks(Comparator.comparingInt(Book::getPublishedYear));
+        });
+
         // Create buttons
         Button addButton = new Button("Add a Book");
         addButton.setOnAction(event -> controller.addBook());
@@ -69,11 +90,8 @@ public class DashboardView {
         Button searchButton = new Button("Search Books");
         searchButton.setOnAction(event -> controller.searchBooks());
 
-        Button sortButton = new Button("Sort Books");
-        sortButton.setOnAction(event -> controller.sortBooks());
-
         // Arrange buttons in an HBox
-        HBox buttonBox = new HBox(10, addButton, editButton, removeButton, searchButton, sortButton);
+        HBox buttonBox = new HBox(10, addButton, editButton, removeButton, searchButton, genreSortButton, nameSortButton, yearSortButton);
         buttonBox.setAlignment(Pos.CENTER);
 
         // Add the TableView and button box to the center and bottom of the BorderPane

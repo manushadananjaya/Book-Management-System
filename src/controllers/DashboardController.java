@@ -2,9 +2,12 @@ package controllers;
 
 import javafx.stage.Stage;
 import javafx.collections.ObservableList;
+import java.util.Comparator;
 import models.Book;
 import views.DashboardView;
 import views.AddEditBookView;
+import views.SearchView;
+
 
 public class DashboardController {
     private final Stage primaryStage;
@@ -30,11 +33,12 @@ public class DashboardController {
     }
 
     public void searchBooks() {
-        // Implement search book functionality
+        SearchView searchView = new SearchView(new Stage(), books);
+        searchView.show();
     }
 
-    public void sortBooks() {
-        // Implement sort book functionality
+    public void sortBooks(Comparator<Book> comparator) {
+        books.sort(comparator);
     }
 
     public ObservableList<Book> getBooks() {
