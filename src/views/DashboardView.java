@@ -57,11 +57,6 @@ public class DashboardView {
         Button nameSortButton = new Button("Sort by Name");
         Button yearSortButton = new Button("Sort by Published Year");
 
-        // Apply styles to sorting buttons
-        genreSortButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
-        nameSortButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
-        yearSortButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
-
         // Sorting event handlers
         genreSortButton.setOnAction(event -> {
             controller.sortBooks(Comparator.comparing(Book::getGenre));
@@ -77,11 +72,9 @@ public class DashboardView {
 
         // Create buttons
         Button addButton = new Button("Add a Book");
-        addButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
         addButton.setOnAction(event -> controller.addBook());
 
         Button editButton = new Button("Edit Book Details");
-        editButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
         editButton.setOnAction(event -> {
             Book selectedBook = tableView.getSelectionModel().getSelectedItem();
             if (selectedBook != null) {
@@ -93,7 +86,6 @@ public class DashboardView {
         });
 
         Button removeButton = new Button("Remove Book");
-        removeButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #f44336; -fx-text-fill: white;");
         removeButton.setOnAction(event -> {
             Book selectedBook = tableView.getSelectionModel().getSelectedItem();
             if (selectedBook != null) {
@@ -105,12 +97,17 @@ public class DashboardView {
         });
 
         Button searchButton = new Button("Search Books");
-        searchButton.setStyle("-fx-font-size: 14px; -fx-padding: 8px 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
         searchButton.setOnAction(event -> controller.searchBooks());
 
         // Arrange buttons in an HBox
         HBox buttonBox = new HBox(10, addButton, editButton, removeButton, searchButton, genreSortButton, nameSortButton, yearSortButton);
         buttonBox.setAlignment(Pos.CENTER);
+
+        // Set padding for the button box
+        buttonBox.setPadding(new Insets(10));
+
+        // Set alignment for the button box
+        BorderPane.setAlignment(buttonBox, Pos.CENTER);
 
         // Add the TableView and button box to the center and bottom of the BorderPane
         root.setCenter(tableView);
