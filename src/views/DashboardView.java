@@ -64,7 +64,7 @@ public class DashboardView {
         });
 
         Button removeButton = new Button("Remove Book");
-        removeButton.setOnAction(event -> controller.removeBook());
+        removeButton.setOnAction(event -> controller.removeBook(tableView.getSelectionModel().getSelectedItem()));
 
         Button searchButton = new Button("Search Books");
         searchButton.setOnAction(event -> controller.searchBooks());

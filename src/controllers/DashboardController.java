@@ -25,8 +25,8 @@ public class DashboardController {
         addEditBookView.show();
     }
 
-    public void removeBook() {
-        // Implement remove book functionality
+    public void removeBook(Book bookToRemove) {
+        books.remove(bookToRemove);
     }
 
     public void searchBooks() {
