@@ -17,7 +17,7 @@ public class Main extends Application {
                 new Book("Book1", Genre.FICTION, Language.ENGLISH, 2020, "1234567890", 200),
                 new Book("Book2", Genre.NONFICTION, Language.SPANISH, 2019, "0987654321", 300),
                 new Book("Book3", Genre.FANTASY, Language.FRENCH, 2018, "1357924680", 250)
-                // Add more sample books as needed
+                
         );
 
         // Show HomeView
