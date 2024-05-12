@@ -51,6 +51,17 @@ public class AddEditBookView {
         TextField pageCountField = new TextField();
         pageCountField.setStyle("-fx-pref-width: 200px;");
 
+        if (bookToEdit != null) {
+            nameField.setText(bookToEdit.getName());
+            Genre genre = Genre.valueOf(bookToEdit.getGenre());
+            genreComboBox.setValue(genre);
+            languageComboBox.setValue(Language.valueOf(bookToEdit.getLanguage()));
+            
+            publishedYearField.setText(String.valueOf(bookToEdit.getPublishedYear()));
+            isbnField.setText(bookToEdit.getIsbn());
+            pageCountField.setText(String.valueOf(bookToEdit.getPageCount()));
+        }
+
         Button addButton = new Button("Add");
         addButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px 16px; -fx-border-radius: 4px;");
         addButton.setOnAction(event -> {
